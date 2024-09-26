@@ -57,7 +57,7 @@ const Profile = () => {
                 <input
                   type="text"
                   placeholder="Enter name"
-                  className="form-input p-4 rounded-sm w-full"
+                  className="form-input p-4 rounded-sm w-full text-black"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                 />
@@ -67,7 +67,7 @@ const Profile = () => {
                 <input
                   type="email"
                   placeholder="Enter email"
-                  className="form-input p-4 rounded-sm w-full"
+                  className="form-input p-4 rounded-sm w-full text-black"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -77,7 +77,7 @@ const Profile = () => {
                 <input
                   type="password"
                   placeholder="Enter password"
-                  className="form-input p-4 rounded-sm w-full"
+                  className="form-input p-4 rounded-sm w-full text-black"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
@@ -89,7 +89,7 @@ const Profile = () => {
                 <input
                   type="password"
                   placeholder="Confirm Password"
-                  className="form-input p-4 rounded-sm w-full"
+                  className="form-input p-4 rounded-sm w-full text-black"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 />
