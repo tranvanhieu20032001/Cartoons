@@ -5,10 +5,14 @@ import Loader from "../../component/Loader";
 import { setCredentials } from "../../redux/features/auth/authSlice";
 import { useLoginMutation } from "../../redux/api/users";
 import { toast } from "react-toastify";
+import { FaEye, FaEyeSlash } from "react-icons/fa"; // Thêm icon mắt
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  
+  // State để kiểm soát hiển thị mật khẩu
+  const [showPassword, setShowPassword] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -56,13 +60,14 @@ const Login = () => {
               <input
                 type="email"
                 id="email"
-                className="mt-1 p-2 border rounded w-full"
+                className="mt-1 p-2 border rounded w-full text-black"
                 placeholder="Enter Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-            <div className="my-[2rem]">
+
+            <div className="my-[2rem] relative">
               <label
                 htmlFor="password"
                 className="block text-sm font-medium text-white"
@@ -70,13 +75,19 @@ const Login = () => {
                 Password
               </label>
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 id="password"
-                className="mt-1 p-2 border rounded w-full"
+                className="mt-1 p-2 border rounded w-full text-black"
                 placeholder="Enter Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
+              <div
+                className="absolute top-10 right-4 cursor-pointer text-black"
+                onClick={() => setShowPassword((prev) => !prev)}
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </div>
             </div>
 
             <button

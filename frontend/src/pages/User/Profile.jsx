@@ -4,12 +4,17 @@ import { toast } from "react-toastify";
 import Loader from "../../component/Loader";
 import { useProfileMutation } from "../../redux/api/users";
 import { setCredentials } from "../../redux/features/auth/authSlice";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 const Profile = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  // State để kiểm soát hiển thị mật khẩu
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const { userInfo } = useSelector((state) => state.auth);
 
@@ -72,27 +77,47 @@ const Profile = () => {
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
-              <div className="mb-4">
+              <div className="mb-4 relative">
                 <label className="block text-white mb-2">Password</label>
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"} // Hiển thị hoặc ẩn mật khẩu
                   placeholder="Enter password"
                   className="form-input p-4 rounded-sm w-full text-black"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
+                <button
+                  type="button"
+                  className="absolute right-4 top-12 text-black"
+                  onClick={() => setShowPassword(!showPassword)} // Toggle hiển thị mật khẩu
+                >
+                  {showPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
+                </button>
               </div>
-              <div className="mb-4">
+              <div className="mb-4 relative">
                 <label className="block text-white mb-2">
                   Confirm Password
                 </label>
                 <input
-                  type="password"
+                  type={showConfirmPassword ? "text" : "password"} // Hiển thị hoặc ẩn confirm password
                   placeholder="Confirm Password"
                   className="form-input p-4 rounded-sm w-full text-black"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 />
+                <button
+                  type="button"
+                  className="absolute right-4 top-12 text-black"
+                  onClick={() =>
+                    setShowConfirmPassword(!showConfirmPassword)
+                  } // Toggle hiển thị confirm password
+                >
+                  {showConfirmPassword ? (
+                    <AiFillEyeInvisible />
+                  ) : (
+                    <AiFillEye />
+                  )}
+                </button>
               </div>
 
               <div className="flex justify-between">

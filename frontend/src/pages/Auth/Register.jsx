@@ -5,12 +5,17 @@ import Loader from "../../component/Loader";
 import { setCredentials } from "../../redux/features/auth/authSlice";
 import { useRegisterMutation } from "../../redux/api/users";
 import { toast } from "react-toastify";
+import { FaEye, FaEyeSlash } from "react-icons/fa"; // Thêm icon mắt
 
 const Register = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  
+  // State để kiểm soát hiển thị mật khẩu
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -63,7 +68,7 @@ const Register = () => {
             <input
               type="text"
               id="name"
-              className="mt-1 p-2 border rounded w-full"
+              className="mt-1 p-2 border rounded w-full text-black"
               placeholder="Enter Name"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
@@ -79,13 +84,13 @@ const Register = () => {
             <input
               type="email"
               id="email"
-              className="mt-1 p-2 border rounded w-full"
+              className="mt-1 p-2 border rounded w-full text-black"
               placeholder="Enter Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <div className="my-[2rem]">
+          <div className="my-[2rem] relative">
             <label
               htmlFor="password"
               className="block text-sm font-medium text-white"
@@ -93,15 +98,21 @@ const Register = () => {
               Password
             </label>
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               id="password"
-              className="mt-1 p-2 border rounded w-full"
+              className="mt-1 p-2 border rounded w-full text-black"
               placeholder="Enter Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
+            <div
+              className="absolute top-10 right-4 cursor-pointer text-black"
+              onClick={() => setShowPassword((prev) => !prev)}
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </div>
           </div>
-          <div className="my-[2rem]">
+          <div className="my-[2rem] relative">
             <label
               htmlFor="confirmPassword"
               className="block text-sm font-medium text-white"
@@ -109,13 +120,19 @@ const Register = () => {
               Confirm Password
             </label>
             <input
-              type="password"
+              type={showConfirmPassword ? "text" : "password"}
               id="confirmPassword"
-              className="mt-1 p-2 border rounded w-full"
+              className="mt-1 p-2 border rounded w-full text-black"
               placeholder="Confirm Password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
+            <div
+              className="absolute top-10 right-4 cursor-pointer text-black"
+              onClick={() => setShowConfirmPassword((prev) => !prev)}
+            >
+              {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+            </div>
           </div>
 
           <button
@@ -149,4 +166,5 @@ const Register = () => {
     </div>
   );
 };
+
 export default Register;
